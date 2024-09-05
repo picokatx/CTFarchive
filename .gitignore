@@ -1,0 +1,6 @@
+node_modules
+logs
+.venv
+.vscode
+ghidra_project_dir
+old
