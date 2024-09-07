@@ -34,8 +34,7 @@ def rc4_fms_possible_key_bit(key, c):
     return (c[0] - j - s[len(key)]) % 256
 
 def encrypt_flag():
-    temp = json_get(f"https://aes.cryptohack.org/paper_plane/encrypt_flag/")
-    return bytes.fromhex(temp['ciphertext']), bytes.fromhex(temp['m0']), bytes.fromhex(temp['c0'])
+    return [bytes.fromhex(c) for c in json_get(f"https://aes.cryptohack.org/paper_plane/encrypt_flag/").values()]
 def send_msg(ciphertext, m0, c0):
     return json_get(f"https://aes.cryptohack.org/paper_plane/send_msg/{ciphertext}/{m0}/{c0}")
 def padding_oracle(ciphertext, m0, c0):
@@ -44,5 +43,5 @@ def padding_oracle(ciphertext, m0, c0):
 KEY =  b"key{the_aes_key}"
 FLAG = b"crypto{aes_flag}"
 PLAIN =b"Howdy! I'm Flowe"
-def pool(func, iters: int, workers: int, *args):
-    return p_map(func, *(range(0,iters), *args), num_cpus=workers, total=iters)
+def pool(func, iters: int, workers: int):
+    return p_map(func, range(0,iters), num_cpus=workers)
