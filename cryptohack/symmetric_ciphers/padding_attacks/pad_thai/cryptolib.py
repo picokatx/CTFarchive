@@ -202,7 +202,7 @@ THAI_MACOS_CODEC = {
     0x7C: ["\u007C"],	# VERTICAL LINE
     0x7D: ["\u007D"],	# RIGHT CURLY BRACKET
     0x7E: ["\u007E"],	# TILDE
-    0x7F: ["\u0000"],  # CRYPTOHACK
+    0x7F: ["\ufffe"],  # CRYPTOHACK
     0x80: ["\u00AB"],	# LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
     0x81: ["\u00BB"],	# RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
     0x82: ["\u2026"],	# HORIZONTAL ELLIPSIS
@@ -219,7 +219,7 @@ THAI_MACOS_CODEC = {
     0x8D: ["\u201C"],	# LEFT DOUBLE QUOTATION MARK
     0x8E: ["\u201D"],	# RIGHT DOUBLE QUOTATION MARK
     0x8F: ["\u0E4D","\uF874"],	# THAI CHARACTER NIKHAHIT, left position
-    0x90: ["\u0000"],  # CRYPTOHACK
+    0x90: ["\ufffe"],  # CRYPTOHACK
     0x91: ["\u2022"],	# BULLET
     0x92: ["\u0E31","\uF874"],	# THAI CHARACTER MAI HAN-AKAT, left position
     0x93: ["\u0E47","\uF874"],	# THAI CHARACTER MAITAIKHU, left position
@@ -234,7 +234,7 @@ THAI_MACOS_CODEC = {
     0x9C: ["\u0E4C","\uF874"],	# THAI CHARACTER THANTHAKHAT, left position
     0x9D: ["\u2018"],	# LEFT SINGLE QUOTATION MARK
     0x9E: ["\u2019"],	# RIGHT SINGLE QUOTATION MARK
-    0x9F: ["\u0000"],  # CRYPTOHACK
+    0x9F: ["\ufffe"],  # CRYPTOHACK
     0xA0: ["\u00A0"],	# NO-BREAK SPACE
     0xA1: ["\u0E01"],	# THAI CHARACTER KO KAI
     0xA2: ["\u0E02"],	# THAI CHARACTER KHO KHAI
@@ -327,8 +327,8 @@ THAI_MACOS_CODEC = {
     0xF9: ["\u0E59"],	# THAI DIGIT NINE
     0xFA: ["\u00AE"],	# REGISTERED SIGN
     0xFB: ["\u00A9"],	# COPYRIGHT SIGN
-    0xFC: ["\u0000"],  # CRYPTOHACK
-    0xFD: ["\u0000"],  # CRYPTOHACK
-    0xFE: ["\u0000"],  # CRYPTOHACK
-    0xFF: ["\u0000"],  # CRYPTOHACK
+    0xFC: ["\ufffe"],  # CRYPTOHACK
+    0xFD: ["\ufffe"],  # CRYPTOHACK
+    0xFE: ["\ufffe"],  # CRYPTOHACK
+    0xFF: ["\ufffe"],  # CRYPTOHACK
 }
