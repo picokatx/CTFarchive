@@ -1,0 +1,23 @@
+## SHA256 Checksum
+
+b07bccf6f393cbaeec6e3a6a8248ecda58f0c44aa13930fecb35f5c8d8dfb861  disk.zip
+
+## Password
+
+PDSJphXCbhTZJGh14mH37BbX4wfLNdIXweGUzr22RBef6brvk1KmrR4wVqgTONv
+
+flag.txt
+flag.sus
+flag.txt.sus
+mypal desktop
+flag used to be in desktop
+
+ibxh2pqf.default
+a80ofn6a.default-default # !!
+
+yahoo 1 cookie
+
+https://csitfan-chall.s3.amazonaws.com/ in places.sqlite -> moz-origins
+https://csitfan-chall.s3.amazonaws.com/flag.sus	in -> moz_places
+
+TISC{tru3_1nt3rn3t_h1st0r13_8445632pq78dfn3s}
