@@ -152,6 +152,39 @@ def pollard(n):
         if (d > 1):
             return d
         i += 1
+def mod_inv(a, n):
+    temp = gcd(a,n)[0]
+    if (temp<0):
+        temp+=n
+    return temp
+from math import prod
+def crt(C, N):
+    total = 0
+    modulo = prod(N)
+    for n_i, c_i in zip(N, C):
+        p = modulo // n_i
+        total += c_i * mod_inv(p, n_i) * p
+    return total % modulo
+
+from itertools import combinations
+from sympy import integer_nthroot
+from Crypto.Util import number
+from itertools import combinations
+
+def hastad(c, n, e):
+    for grp in combinations(zip(n, c), e):
+        N = 1
+        for x in grp: N *= x[0]
+
+        M = 0
+        for x in grp:
+            M += x[1]*mod_inv(N//x[0], x[0])*(N//x[0])
+        M %= N
+
+        m, exact = integer_nthroot(M, e)
+        if exact:
+            return m
+
 from sympy.solvers import solve
 from sympy import Symbol
 from sympy.ntheory.continued_fraction import continued_fraction_convergents
@@ -167,38 +200,6 @@ def wiener_attack(e,n):
         phi = (e*d - 1)//k
         x = Symbol('x')
         print(d, solve(x**2 - ((n-phi)+1)*x + n, x))
-from itertools import combinations
-from sympy import integer_nthroot
-from Crypto.Util import number
-from itertools import combinations
-
-def mod_inv(a, n):
-    temp = gcd(a,n)[0]
-    if (temp<0):
-        temp+=n
-    return temp
-from math import prod
-def crt(C, N):
-    total = 0
-    modulo = prod(N)
-    for n_i, c_i in zip(N, C):
-        p = modulo // n_i
-        total += c_i * mod_inv(p, n_i) * p
-    return total % modulo
-def hastad(c, n, e):
-    for grp in combinations(zip(n, c), e):
-        N = 1
-        for x in grp: N *= x[0]
-
-        M = 0
-        for x in grp:
-            M += x[1]*mod_inv(N//x[0], x[0])*(N//x[0])
-        M %= N
-
-        m, exact = integer_nthroot(M, e)
-        if exact:
-            return m
-
 morse_codec = ascii_uppercase+"0123456789"
 morse_table = ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..', '-----', '.----', '..---', '...--', '....-', '.....', '-....', '--...', '---..', '----.']
 

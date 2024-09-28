@@ -16,6 +16,7 @@ from math import log2
 import random
 import math
 import sympy
+from math import prod
 from string import ascii_lowercase, ascii_uppercase, ascii_letters
 def json_get(url) -> dict:
     return json.loads(requests.get(url).content.decode())
@@ -47,11 +48,12 @@ def rc4_fms_possible_key_bit(key, c):
         s[i], s[j] = s[j], s[i]
     return (c[0] - j - s[len(key)]) % 256
 def hello_world():
-    r = remote("socket.cryptohack.org", 13421)
-    # r = remote("localhost", 13421)
-    r.recvline()
+    r = remote("94.237.61.58", 37822)
     return r
-
+def get_key(r: remote):
+    r.recvuntil(b"(Y/n) ")
+    r.send(b"YES\n")
+    return json.loads(r.recvline())
 def b64d(s):
     return base64.b64decode(s).decode()
 def hxd(s):
@@ -81,6 +83,18 @@ def gcd(a, b):
     return s0, t0, q0
 def lcm(a,b):
     return abs(a*b)//gcd(a,b)[0]
+def mod_inv(a, n):
+    temp = gcd(a,n)[0]
+    if (temp<0):
+        temp+=n
+    return temp
+def crt(C, N):
+    total = 0
+    modulo = prod(N)
+    for n_i, c_i in zip(N, C):
+        p = modulo // n_i
+        total += c_i * mod_inv(p, n_i) * p
+    return total % modulo
 ascii32bit = "abcdefghijklmnopqrstuvwxyz.,!?' "
 def ascii32bit_encode(s: str):
     acc = 0
@@ -152,53 +166,6 @@ def pollard(n):
         if (d > 1):
             return d
         i += 1
-from sympy.solvers import solve
-from sympy import Symbol
-from sympy.ntheory.continued_fraction import continued_fraction_convergents
-from sympy import Rational
-from sympy.ntheory import continued_fraction
-def wiener_attack(e,n):
-    cf = continued_fraction(Rational(e,n))
-    for c in list(continued_fraction_convergents(cf)):
-        k = c.p
-        d = c.q
-        if (k==0 or d%2==0 or e*d%k!=1):
-            continue
-        phi = (e*d - 1)//k
-        x = Symbol('x')
-        print(d, solve(x**2 - ((n-phi)+1)*x + n, x))
-from itertools import combinations
-from sympy import integer_nthroot
-from Crypto.Util import number
-from itertools import combinations
-
-def mod_inv(a, n):
-    temp = gcd(a,n)[0]
-    if (temp<0):
-        temp+=n
-    return temp
-from math import prod
-def crt(C, N):
-    total = 0
-    modulo = prod(N)
-    for n_i, c_i in zip(N, C):
-        p = modulo // n_i
-        total += c_i * mod_inv(p, n_i) * p
-    return total % modulo
-def hastad(c, n, e):
-    for grp in combinations(zip(n, c), e):
-        N = 1
-        for x in grp: N *= x[0]
-
-        M = 0
-        for x in grp:
-            M += x[1]*mod_inv(N//x[0], x[0])*(N//x[0])
-        M %= N
-
-        m, exact = integer_nthroot(M, e)
-        if exact:
-            return m
-
 morse_codec = ascii_uppercase+"0123456789"
 morse_table = ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..', '-----', '.----', '..---', '...--', '....-', '.....', '-....', '--...', '---..', '----.']
 
