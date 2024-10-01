@@ -12,7 +12,7 @@ FLAG = b"crypto{????????????}"
 
 primes = []
 
-
+# nonsus
 def sieve(maximum=10000):
     # In general Sieve of Sundaram, produces primes smaller
     # than (2*x + 2) for a number given number x. Since
@@ -36,14 +36,14 @@ def sieve(maximum=10000):
         if (marked[i] == False):
             primes.append(2*i + 1)
 
-
+#nonsus
 def get_primorial(n):
     result = 1
     for i in range(n):
         result = result * primes[i]
     return result
 
-
+# sus
 def get_fast_prime():
     M = get_primorial(40)
     while True:
