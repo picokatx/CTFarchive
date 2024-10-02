@@ -192,11 +192,7 @@ def diffie_hellman_decrypt_flag(shared_secret: int, iv: str, ciphertext: str):
     iv = bytes.fromhex(iv)
     cipher = AES.new(key, AES.MODE_CBC, iv)
     plaintext = cipher.decrypt(ciphertext)
-
-    if is_pkcs7_padded(plaintext):
-        return unpad(plaintext, 16).decode('ascii')
-    else:
-        return plaintext.decode('ascii')
+    return plaintext
     
 from sympy.solvers import solve
 from sympy import Symbol

@@ -184,6 +184,7 @@ def is_pkcs7_padded(message):
 
 def diffie_hellman_decrypt_flag(shared_secret: int, iv: str, ciphertext: str):
     # Derive AES key from shared secret
+    assert type(shared_secret)==int, "input must be integer"
     sha1 = hashlib.sha1()
     sha1.update(str(shared_secret).encode('ascii'))
     key = sha1.digest()[:16]
@@ -192,12 +193,11 @@ def diffie_hellman_decrypt_flag(shared_secret: int, iv: str, ciphertext: str):
     iv = bytes.fromhex(iv)
     cipher = AES.new(key, AES.MODE_CBC, iv)
     plaintext = cipher.decrypt(ciphertext)
-
     if is_pkcs7_padded(plaintext):
         return unpad(plaintext, 16).decode('ascii')
     else:
-        return plaintext.decode('ascii')
-    
+        return plaintext
+
 from sympy.solvers import solve
 from sympy import Symbol
 from sympy.ntheory.continued_fraction import continued_fraction_convergents
