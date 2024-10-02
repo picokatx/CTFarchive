@@ -1,0 +1,6 @@
+- encoder
+- encryptor
+- decryptor
+- bootstrapping_context (cihpertext with many operations already performed on it will have too high an error to continue. so we need to bootstrap to refresh the e)
+- keygen
+- params
